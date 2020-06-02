@@ -23,9 +23,19 @@ class WebViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        if #available(iOS 13.0, *) {
+            backgroundColor = UIColor(dynamicProvider: { (traitCollection) -> UIColor in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return UIColor(red: 0x17/255.0, green: 0x18/255.0, blue: 0x1a/255.0, alpha: 1)
+                }
+
+                return .white
+            })
+        }
+
         markdownWebView.heightChangedHandler = { [weak self] (height) in
             NSLog("height changed: %lf", height)
-            
+
             if #available(iOS 11.0, *) {
                 self?.tableView?.performBatchUpdates({
                 })
@@ -80,6 +90,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([

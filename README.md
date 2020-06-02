@@ -70,4 +70,10 @@ func loadURL(_ url: URL?, completion: ((String?) -> Void)?) {
 
 ## Screenshot
 
-![](screenshot.png)
+Light mode
+
+![](light.png)
+
+Dark mode
+
+![](dark.png)
